@@ -1,5 +1,8 @@
 package Compare.Length;
 
+import Compare.Volume.Gallon;
+import Compare.Volume.Litre;
+
 import java.util.HashMap;
 
 public class Unit {
@@ -16,8 +19,6 @@ public class Unit {
         scales.put(Centimeter.class, new Inch(value/2.5));
         scales.put(Inch.class , new Inch(value));
         scales.put(Milimeter.class , new Inch(value/25));
-        scales.put(Gallon.class,new Inch(value));
-        scales.put(Litre.class , new Inch(value/3.78));
         return scales.get(className);
     }
 

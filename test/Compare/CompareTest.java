@@ -1,11 +1,19 @@
 package Compare;
 
 import Compare.Length.*;
+import Compare.Volume.Gallon;
+import Compare.Volume.Litre;
+import Compare.Volume.Volume;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 
 public class CompareTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void compareLengthShouldGiveTrueIfBothTheQuantitiesHaveSameValueInOneUnit() throws Exception {
         Unit feet = new Feet(1);
@@ -54,22 +62,26 @@ public class CompareTest {
 
     @Test
     public void scalesShouldBeAbleToCompareGallonAndLiter() throws Exception {
-        Unit gallon = new Gallon(1);
-        Unit liter = new Litre(3.78);
+        Volume gallon = new Gallon(1);
+        Volume liter = new Litre(3.78);
         assertEquals(gallon,liter);
     }
 
-    @Test
-    public void unitShouldBeAbleToCompareTheGallonAndinch() throws Exception {
-        Unit gallon = new Gallon(1);
-        Unit inch = new Inch(1);
-        assertEquals(gallon,inch);
-    }
     @Test
     public void scalesShouldBeAbleToAddGallonWithLiter() throws Exception {
         Gallon gallon = new Gallon(1);
         Litre litre = new Litre(1);
         Litre sum = new Litre(4.78);
         assertEquals(sum,gallon.add(litre));
+    }
+
+    @Test
+    public void scalesShouldNotBeAbleToAddLitreToInch() throws Exception {
+        Litre liter = new Litre(1);
+        Inch inch = new Inch(1);
+        thrown.expect(Exception.class);
+        thrown.expectMessage("my teacher is an idiot");
+        liter.add(inch);
+
     }
 }
