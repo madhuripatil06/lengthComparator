@@ -55,7 +55,7 @@ public class CompareTest {
     @Test
     public void scalesShouldBeAbleToCompareGallonAndLiter() throws Exception {
         Unit gallon = new Gallon(1);
-        Unit liter = new Liter(3.78);
+        Unit liter = new Litre(3.78);
         assertEquals(gallon,liter);
     }
 
@@ -68,8 +68,8 @@ public class CompareTest {
     @Test
     public void scalesShouldBeAbleToAddGallonWithLiter() throws Exception {
         Gallon gallon = new Gallon(1);
-        Liter liter = new Liter(1);
-        Liter sum = new Liter(4.78);
-        assertEquals(sum,gallon.add(liter));
+        Litre litre = new Litre(1);
+        Litre sum = new Litre(4.78);
+        assertEquals(sum,gallon.add(litre));
     }
 }
