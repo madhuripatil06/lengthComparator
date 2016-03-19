@@ -1,11 +1,9 @@
 package Compare;
 
 import Compare.Length.*;
-import Compare.Volume.Gallon;
-import Compare.Volume.Liter;
-import Compare.Volume.Volume;
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class CompareTest {
     @Test
@@ -13,29 +11,29 @@ public class CompareTest {
         Unit feet = new Feet(1);
         Unit inch = new Inch(12);
 
-        Assert.assertEquals(feet,inch);
+        assertEquals(feet,inch);
     }
 
     @Test
     public void scaleShouldBeAbleToCompareWithItsOwnType() throws Exception {
         Unit feet = new Feet(1);
         Unit inch = new Inch(12);
-        Assert.assertEquals(feet,feet);
-        Assert.assertEquals(inch,inch);
+        assertEquals(feet,feet);
+        assertEquals(inch,inch);
     }
 
     @Test
     public void withTheHelpOfTheScaleIShouldBeAbleToCompereInchToCentimeter() throws Exception {
         Unit inch = new Inch(1);
         Unit centimeter = new Centimeter(2.5);
-        Assert.assertEquals(inch,centimeter);
+        assertEquals(inch,centimeter);
     }
 
     @Test
     public void withTheHelpOfTheScaleIShouldBeAbleToCompereCentimeterToMilimeter() throws Exception {
         Unit centimeter = new Centimeter(1);
         Unit milimeter = new Milimeter(10);
-        Assert.assertEquals(centimeter,milimeter);
+        assertEquals(centimeter,milimeter);
     }
 
     @Test
@@ -43,7 +41,7 @@ public class CompareTest {
         Unit inch1 = new Inch(2);
         Unit inch2 = new Inch(2);
         Inch sum = new Inch(4);
-        Assert.assertEquals(sum,inch1.add(inch2));
+        assertEquals(sum,inch1.add(inch2));
     }
 
     @Test
@@ -51,16 +49,27 @@ public class CompareTest {
         Unit centimeter = new Centimeter(2.5);
         Unit inch = new Inch(2);
         Unit sum = new Inch(3);
-        Assert.assertEquals(sum,inch.add(centimeter));
+        assertEquals(sum,inch.add(centimeter));
     }
 
     @Test
     public void scalesShouldBeAbleToCompareGallonAndLiter() throws Exception {
-        Volume gallon = new Gallon(1);
-        Volume liter = new Liter(3.78);
-        Assert.assertEquals(gallon,liter);
+        Unit gallon = new Gallon(1);
+        Unit liter = new Liter(3.78);
+        assertEquals(gallon,liter);
     }
 
-
-
+    @Test
+    public void unitShouldBeAbleToCompareTheGallonAndinch() throws Exception {
+        Unit gallon = new Gallon(1);
+        Unit inch = new Inch(1);
+        assertEquals(gallon,inch);
+    }
+    @Test
+    public void scalesShouldBeAbleToAddGallonWithLiter() throws Exception {
+        Gallon gallon = new Gallon(1);
+        Liter liter = new Liter(1);
+        Liter sum = new Liter(4.78);
+        assertEquals(sum,gallon.add(liter));
+    }
 }

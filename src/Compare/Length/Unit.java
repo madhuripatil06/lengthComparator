@@ -3,7 +3,6 @@ package Compare.Length;
 import java.util.HashMap;
 
 public class Unit {
-
     private Class nameOfClass;
     private double givenValue;
 
@@ -11,13 +10,14 @@ public class Unit {
         this.nameOfClass = nameOfClass;
         this.givenValue = givenValue;
     }
-
     public Inch convertToInch(Class className, double value){
         HashMap<Class, Inch> scales = new HashMap<Class, Inch>();
         scales.put(Feet.class, new Inch(value*12));
         scales.put(Centimeter.class, new Inch(value/2.5));
         scales.put(Inch.class , new Inch(value));
         scales.put(Milimeter.class , new Inch(value/25));
+        scales.put(Gallon.class,new Inch(value));
+        scales.put(Liter.class , new Inch(value/3.78));
         return scales.get(className);
     }
 
