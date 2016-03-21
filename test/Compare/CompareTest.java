@@ -1,9 +1,8 @@
 package Compare;
 
 import Compare.Length.*;
-import Compare.Volume.Gallon;
-import Compare.Volume.Litre;
 import Compare.Volume.Volume;
+import Compare.Volume.VolumeUnits;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -16,72 +15,69 @@ public class CompareTest {
 
     @Test
     public void compareLengthShouldGiveTrueIfBothTheQuantitiesHaveSameValueInOneUnit() throws Exception {
-        Unit feet = new Feet(1);
-        Unit inch = new Inch(12);
-
-        assertEquals(feet,inch);
+        Length oneFeet = new Length(1, LengthUnits.Feet);
+        Length twelveInch = new Length(12, LengthUnits.Inch);
+        assertEquals(oneFeet,twelveInch);
     }
 
     @Test
-    public void scaleShouldBeAbleToCompareWithItsOwnType() throws Exception {
-        Unit feet = new Feet(1);
-        Unit inch = new Inch(12);
-        assertEquals(feet,feet);
-        assertEquals(inch,inch);
+    public void unitShouldBeAbleToCompareWithItsOwn() {
+        Length oneFeet = new Length(1, LengthUnits.Feet);
+        Length twoInch = new Length(2, LengthUnits.Inch);
+        assertEquals(oneFeet,oneFeet);
+        assertEquals(twoInch,twoInch);
     }
 
     @Test
     public void withTheHelpOfTheScaleIShouldBeAbleToCompereInchToCentimeter() throws Exception {
-        Unit inch = new Inch(1);
-        Unit centimeter = new Centimeter(2.5);
+        Length inch = new Length(1, LengthUnits.Inch);
+        Length centimeter = new Length(2.5, LengthUnits.Centimeter);
         assertEquals(inch,centimeter);
     }
 
     @Test
     public void withTheHelpOfTheScaleIShouldBeAbleToCompereCentimeterToMilimeter() throws Exception {
-        Unit centimeter = new Centimeter(1);
-        Unit milimeter = new Milimeter(10);
-        assertEquals(centimeter,milimeter);
+        Length centimeter = new Length(1, LengthUnits.Centimeter);
+        Length millimeter = new Length(10, LengthUnits.Millimeter);
+        assertEquals(centimeter,millimeter);
     }
 
     @Test
-    public void scalesShouldBeAbleToAddWithAnotherScale() throws Exception {
-        Unit inch1 = new Inch(2);
-        Unit inch2 = new Inch(2);
-        Inch sum = new Inch(4);
+    public void unitsShouldBeAbleToAddWithAnotherScale() throws Exception {
+        Length inch1 = new Length(2, LengthUnits.Inch);
+        Length inch2 = new Length(2, LengthUnits.Inch);
+        Length sum = new Length(4, LengthUnits.Inch);
         assertEquals(sum,inch1.add(inch2));
     }
 
     @Test
-    public void scalesShouldBeAbleToAddWithdifferentScale() throws Exception {
-        Unit centimeter = new Centimeter(2.5);
-        Unit inch = new Inch(2);
-        Unit sum = new Inch(3);
+    public void unitsShouldBeAbleToAddWithdifferentScale() throws Exception {
+        Length centimeter = new Length(2.5, LengthUnits.Centimeter);
+        Length inch = new Length(2, LengthUnits.Inch);
+        Length sum = new Length(3, LengthUnits.Inch);
         assertEquals(sum,inch.add(centimeter));
     }
 
     @Test
-    public void scalesShouldBeAbleToCompareGallonAndLiter() throws Exception {
-        Volume gallon = new Gallon(1);
-        Volume liter = new Litre(3.78);
-        assertEquals(gallon,liter);
+    public void unitsShouldBeAbleToCompareGallonAndLiter() throws Exception {
+        Volume _1Gallon = new Volume(1, VolumeUnits.GALLON);
+        Volume litre = new Volume(3.78, VolumeUnits.LITRE);
+        assertEquals(_1Gallon,litre);
     }
 
     @Test
-    public void scalesShouldBeAbleToAddGallonWithLiter() throws Exception {
-        Gallon gallon = new Gallon(1);
-        Litre litre = new Litre(1);
-        Litre sum = new Litre(4.78);
-        assertEquals(sum,gallon.add(litre));
+    public void unitsShouldBeAbleToAddLitreWithLitre() throws Exception {
+        Volume oneLitre = new Volume(1, VolumeUnits.LITRE);
+        Volume twoLitre = new Volume(2,VolumeUnits.LITRE);
+        Volume threeLitre = new Volume(3,VolumeUnits.LITRE);
+        assertEquals(threeLitre,oneLitre.add(twoLitre));
     }
 
     @Test
-    public void scalesShouldNotBeAbleToAddLitreToInch() throws Exception {
-        Litre liter = new Litre(1);
-        Inch inch = new Inch(1);
-        thrown.expect(Exception.class);
-        thrown.expectMessage("my teacher is an idiot");
-        liter.add(inch);
-
+    public void unitsShouldBeAbleToAddGallonAndLitre() {
+        Volume oneLitre = new Volume(1,VolumeUnits.LITRE);
+        Volume oneGallon = new Volume(1,VolumeUnits.GALLON);
+        Volume sum = new Volume(4.78, VolumeUnits.LITRE);
+        assertEquals(sum,oneGallon.add(oneLitre));
     }
 }
